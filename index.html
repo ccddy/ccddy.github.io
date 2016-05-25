@@ -302,6 +302,142 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/25/64K/" itemprop="url">
+                  Android 64K解决办法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-25T20:58:04+08:00" content="2016-05-25">
+              2016-05-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/25/64K/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/25/64K/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文中采用的方式是官方提供的，官方链接为：</p>
+<p><a href="http://developer.android.com/intl/zh-cn/tools/building/multidex.html" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/tools/building/multidex.html</a></p>
+<p>64K问题比较麻烦，但是官方解决办法其实也比较简单，本文开发环境是as下，eclipse的建议转到as吧。</p>
+<p><strong>APP环境：</strong></p>
+<p>百川IM+趣拍。由于趣拍支持android最低版本为4.0.3，即API为15。实际上现在包括支付宝、微信这些APP支持版本也为4.0.3。</p>
+<p>所以觉得如果APP没太大问题的话建议开发环境最低为4.0，即API14。因为3.0-4.0为平板系统，3.0以下的手机基本上也就没了~~~。</p>
+<p><strong>言归正传：</strong></p>
+<p>Gradle配置只需要app目录下的即可。</p>
+<p><strong>第一步：</strong>设置multiDexEnabled<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K1.png-x" alt=""></p>
+<p><strong>第二步：</strong>引入multidex项目<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K2.png-x" alt=""></p>
+<p><strong>第三步：</strong>配置MultiDexApplication<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K3.png-x" alt=""><br>如果自定义了application，只需要将自定义的application继承改为MultiDexApplication，然后重写attachBaseContext方法，加入MultiDex.install(this);<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K4.png-x" alt=""><br>基本上现在是可以了。</p>
+<p>但是呢，你会发现编译有点慢~然后解决办法来了，因为as2.0加入了代码热更新功能，所以首先要as更新到2.0吧。</p>
+<p>然后在gradle下中的android加入红框框里面的内容：<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K5.png-x" alt=""><br>这个的意思是指开发的时候最低版本为21，（所以你要有一个手机系统为5.0以上的手机吧），然后打包的时候最低版本为15。当然prod的api</p>
+<p>版本也可以根据自己需求更改。</p>
+<p>其实在打包的时候会让你选择是dev还是prod，选择prod为app支持最低版本为15（4.0.3）</p>
+<p>然后又有问题了，你会发现打包的时候会失败，这是内存配置太小了。此时还是在gradle，android的节点下加入：<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K6.png-x" alt=""><br>因为我的电脑是8G内存，所以打包的时候我选择了分配4G。</p>
+<p>可能后面还有些坑没踩到，有问题了后续会补充吧~也欢迎大家多提意见。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/25/博客搭建/" itemprop="url">
                   博客搭建
                 </a>
@@ -484,7 +620,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -492,7 +628,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
