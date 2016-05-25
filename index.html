@@ -371,26 +371,17 @@
 
       
         
-          
-            <p>本文中采用的方式是官方提供的，官方链接为：</p>
-<p><a href="http://developer.android.com/intl/zh-cn/tools/building/multidex.html" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/tools/building/multidex.html</a></p>
+          <p>本文中采用的方式是官方提供的，官方链接为：</p>
+<p><a href="http://developer.android.com/intl/zh-cn/tools/building/multidex.html">http://developer.android.com/intl/zh-cn/tools/building/multidex.html</a></p>
 <p>64K问题比较麻烦，但是官方解决办法其实也比较简单，本文开发环境是as下，eclipse的建议转到as吧。</p>
 <p><strong>APP环境：</strong></p>
 <p>百川IM+趣拍。由于趣拍支持android最低版本为4.0.3，即API为15。实际上现在包括支付宝、微信这些APP支持版本也为4.0.3。</p>
 <p>所以觉得如果APP没太大问题的话建议开发环境最低为4.0，即API14。因为3.0-4.0为平板系统，3.0以下的手机基本上也就没了~~~。</p>
-<p><strong>言归正传：</strong></p>
-<p>Gradle配置只需要app目录下的即可。</p>
-<p><strong>第一步：</strong>设置multiDexEnabled<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K1.png-x" alt=""></p>
-<p><strong>第二步：</strong>引入multidex项目<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K2.png-x" alt=""></p>
-<p><strong>第三步：</strong>配置MultiDexApplication<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K3.png-x" alt=""><br>如果自定义了application，只需要将自定义的application继承改为MultiDexApplication，然后重写attachBaseContext方法，加入MultiDex.install(this);<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K4.png-x" alt=""><br>基本上现在是可以了。</p>
-<p>但是呢，你会发现编译有点慢~然后解决办法来了，因为as2.0加入了代码热更新功能，所以首先要as更新到2.0吧。</p>
-<p>然后在gradle下中的android加入红框框里面的内容：<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K5.png-x" alt=""><br>这个的意思是指开发的时候最低版本为21，（所以你要有一个手机系统为5.0以上的手机吧），然后打包的时候最低版本为15。当然prod的api</p>
-<p>版本也可以根据自己需求更改。</p>
-<p>其实在打包的时候会让你选择是dev还是prod，选择prod为app支持最低版本为15（4.0.3）</p>
-<p>然后又有问题了，你会发现打包的时候会失败，这是内存配置太小了。此时还是在gradle，android的节点下加入：<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/64k64K6.png-x" alt=""><br>因为我的电脑是8G内存，所以打包的时候我选择了分配4G。</p>
-<p>可能后面还有些坑没踩到，有问题了后续会补充吧~也欢迎大家多提意见。</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/25/64K/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -507,8 +498,7 @@
 
       
         
-          
-            <p>电脑是Windows环境。这篇文章主要是用来记录本次博客的搭建。</p>
+          <p>电脑是Windows环境。这篇文章主要是用来记录本次博客的搭建。</p>
 <p>###<strong>先说下大致流程</strong></p>
 <blockquote>
 <ul>
@@ -518,41 +508,12 @@
 <li>安装Hexo</li>
 </ul>
 </blockquote>
-<h3 id="1、注册github账号并建立仓库"><a href="#1、注册github账号并建立仓库" class="headerlink" title="1、注册github账号并建立仓库"></a><strong>1、注册github账号并建立仓库</strong></h3><h4 id="注册github"><a href="#注册github" class="headerlink" title="注册github"></a><strong>注册github</strong></h4><p>打开github官方网站：<a href="https://github.com" target="_blank" rel="external">https://github.com</a><br>会让输入用户名、邮箱、密码，用户名建议不要用中文，邮箱填写自己常用的吧（后面会在邮箱里接收激活邮件）。</p>
-<h4 id="建立仓库"><a href="#建立仓库" class="headerlink" title="建立仓库"></a><strong>建立仓库</strong></h4><p>然后点击<strong>New repository</strong>创建新的仓库，仓库参数如下：<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/other1%E3%80%81%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93.png-x" alt="创建仓库"></p>
-<ul>
-<li>第1步中<strong>Repository name</strong>为<strong>xxx.gitub.io</strong>其中xxx为注册中的用户名</li>
-<li>然后按照第2、3、4步完成创建</li>
-</ul>
-<h4 id="2、安装github-for-Windows"><a href="#2、安装github-for-Windows" class="headerlink" title="2、安装github for Windows"></a><strong>2、安装github for Windows</strong></h4><h4 id="下载并安装"><a href="#下载并安装" class="headerlink" title="下载并安装"></a><strong>下载并安装</strong></h4><p>下载地址：<a href="https://windows.github.com/" target="_blank" rel="external">https://windows.github.com/</a><br>点击<strong>Dwnload Github Destop</strong>下载并运行安装，因为某原因导致国内下载速度较慢，大家可以选在挂代理或者找下载好的安装包。<br>安装完成后登录即可。</p>
-<h4 id="测试SSH-Key"><a href="#测试SSH-Key" class="headerlink" title="测试SSH Key"></a><strong>测试SSH Key</strong></h4><p>在所有应用程序中找到<strong>Git Shell</strong>并点击打开，如下图：<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/other2%E3%80%81%E6%B5%8B%E8%AF%95SSH.png-x" alt="测试SSH Key"></p>
-<p>打开后输入</p>
-<blockquote>
-<p>ssh -T git@github.com</p>
-</blockquote>
-<p>出现下面红线标识结果即可(实际上安装github for Windows的时候SSH Key已经生成了)：<br><img src="http://7xuis7.com1.z0.glb.clouddn.com/other3%E3%80%81%E6%B5%8B%E8%AF%95SSH%E7%BB%93%E6%9E%9C.png-x" alt="SSH Key成功"></p>
-<h3 id="3、安装Node-js"><a href="#3、安装Node-js" class="headerlink" title="3、安装Node.js"></a><strong>3、安装Node.js</strong></h3><p>下载地址:<a href="https://nodejs.org/en/" target="_blank" rel="external">https://nodejs.org/en/</a><br>下载完成后安装即可(一直下一步就行)</p>
-<h3 id="4、安装Hexo"><a href="#4、安装Hexo" class="headerlink" title="4、安装Hexo"></a><strong>4、安装Hexo</strong></h3><h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a><strong>安装hexo</strong></h4><p>打开Git Shell，运行以下命令：</p>
-<blockquote>
-<p>npm install hexo-cli -g</p>
-</blockquote>
-<h4 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a><strong>部署hexo</strong></h4><p>现在指定的目录建立要存放hexo的文件夹，比如我在D盘建立里Hexo文件夹，命令行进入到此文件夹下运行以下命令：</p>
-<blockquote>
-<p>hexo init</p>
-</blockquote>
-<p>然后运行命令：</p>
-<blockquote>
-<p>npm install</p>
-</blockquote>
-<p>接着：</p>
-<blockquote>
-<p>hexo generate<br>hexo server</p>
-</blockquote>
-<p>在浏览器中输入<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 即可观看效果。</p>
-<p>Hexo的使用配置可参考<a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo</a>官方文档。</p>
-<hr>
-<h2 id="END"><a href="#END" class="headerlink" title="END"></a>END</h2>
-          
+<h3 id="1、注册github账号并建立仓库"><a href="#1、注册github账号并建立仓库" class="headerlink" title="1、注册github账号并建立仓库"></a><strong>1、注册github账号并建立仓库</strong></h3><h4 id="注册github"><a href="#注册github" class="headerlink" title="注册github"></a><strong>注册github</strong></h4><p>打开github官方网站：<a href="https://github.com">https://github.com</a><br>会让输入用户名、邮箱、密码，用户名建议不要用中文，邮箱填写自己常用的吧（后面会在邮箱里接收激活邮件）。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/25/博客搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -634,6 +595,13 @@
             </div>
           
 
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
           
 
         </nav>
