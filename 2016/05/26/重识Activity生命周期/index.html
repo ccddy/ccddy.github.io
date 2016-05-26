@@ -84,15 +84,49 @@
 
 
 
-<meta name="description" content="一起学习进步吧">
-<meta property="og:type" content="website">
-<meta property="og:title" content="聪聪的豆芽">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="Activity基本上以三种状态存在：
+
+
+运行中  位于屏幕前台并且具有焦点
+已暂停  另一个activity在上方，但是主题为透明或者未覆盖整个屏幕，此时内存极度不足的情况下旧activity可能会被回收。
+已停止  被另一个activity完全遮挡，此时内存极度不足的情况下旧activity可能会被回收。
+
+
+典型的activity生命周期
+onCreate：一切的开始，初始化界面、数据
+o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重识Activity生命周期">
+<meta property="og:url" content="http://yoursite.com/2016/05/26/重识Activity生命周期/index.html">
 <meta property="og:site_name" content="聪聪的豆芽">
-<meta property="og:description" content="一起学习进步吧">
+<meta property="og:description" content="Activity基本上以三种状态存在：
+
+
+运行中  位于屏幕前台并且具有焦点
+已暂停  另一个activity在上方，但是主题为透明或者未覆盖整个屏幕，此时内存极度不足的情况下旧activity可能会被回收。
+已停止  被另一个activity完全遮挡，此时内存极度不足的情况下旧activity可能会被回收。
+
+
+典型的activity生命周期
+onCreate：一切的开始，初始化界面、数据
+o">
+<meta property="og:image" content="http://7xuis7.com1.z0.glb.clouddn.com/activity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9Factivity_life.png-x">
+<meta property="og:image" content="http://7xuis7.com1.z0.glb.clouddn.com/activity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F2.png-x">
+<meta property="og:updated_time" content="2016-05-26T16:00:43.757Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="聪聪的豆芽">
-<meta name="twitter:description" content="一起学习进步吧">
+<meta name="twitter:title" content="重识Activity生命周期">
+<meta name="twitter:description" content="Activity基本上以三种状态存在：
+
+
+运行中  位于屏幕前台并且具有焦点
+已暂停  另一个activity在上方，但是主题为透明或者未覆盖整个屏幕，此时内存极度不足的情况下旧activity可能会被回收。
+已停止  被另一个activity完全遮挡，此时内存极度不足的情况下旧activity可能会被回收。
+
+
+典型的activity生命周期
+onCreate：一切的开始，初始化界面、数据
+o">
+<meta name="twitter:image" content="http://7xuis7.com1.z0.glb.clouddn.com/activity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9Factivity_life.png-x">
 
 
 
@@ -110,7 +144,7 @@
   };
 </script>
 
-  <title> 聪聪的豆芽 </title>
+  <title> 重识Activity生命周期 | 聪聪的豆芽 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -150,9 +184,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -279,9 +311,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -301,10 +333,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/05/26/重识Activity生命周期/" itemprop="url">
-                  重识Activity生命周期
-                </a>
+                重识Activity生命周期
               
             
           </h1>
@@ -370,9 +399,7 @@
       
 
       
-        
-          
-            <p>Activity基本上以三种状态存在：</p>
+        <p>Activity基本上以三种状态存在：</p>
 <blockquote>
 <ul>
 <li>运行中<br>  位于屏幕前台并且具有焦点</li>
@@ -404,16 +431,19 @@
 </ul>
 <p><br><br>后面会总结下activity的启动模式这个问题。欢迎大家指正错误，共同学习。</p>
 <h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3>
-          
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
@@ -421,278 +451,51 @@
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/05/25/64K/" rel="next" title="Android 64K解决办法">
+                <i class="fa fa-chevron-left"></i> Android 64K解决办法
+              </a>
             
-              
-                
-                <a class="post-title-link" href="/2016/05/25/64K/" itemprop="url">
-                  Android 64K解决办法
-                </a>
-              
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-25T20:58:04+08:00" content="2016-05-25">
-              2016-05-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/25/64K/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/25/64K/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>本文中采用的方式是官方提供的，官方链接为：</p>
-<p><a href="http://developer.android.com/intl/zh-cn/tools/building/multidex.html">http://developer.android.com/intl/zh-cn/tools/building/multidex.html</a></p>
-<p>64K问题比较麻烦，但是官方解决办法其实也比较简单，本文开发环境是as下，eclipse的建议转到as吧。</p>
-<p><strong>APP环境：</strong></p>
-<p>百川IM+趣拍。由于趣拍支持android最低版本为4.0.3，即API为15。实际上现在包括支付宝、微信这些APP支持版本也为4.0.3。</p>
-<p>所以觉得如果APP没太大问题的话建议开发环境最低为4.0，即API14。因为3.0-4.0为平板系统，3.0以下的手机基本上也就没了~~~。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/25/64K/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
+
+    <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2016/05/26/重识Activity生命周期/"
+     data-title="重识Activity生命周期"
+     data-content=""
+     data-url="http://yoursite.com/2016/05/26/重识Activity生命周期/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
 
-  
-  
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/25/博客搭建/" itemprop="url">
-                  博客搭建
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-25T09:01:25+08:00" content="2016-05-25">
-              2016-05-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/chat/" itemprop="url" rel="index">
-                    <span itemprop="name">chat</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/25/博客搭建/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/25/博客搭建/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>电脑是Windows环境。这篇文章主要是用来记录本次博客的搭建。</p>
-<p>###<strong>先说下大致流程</strong></p>
-<blockquote>
-<ul>
-<li>注册github账号并建立仓库</li>
-<li>安装github for Windows</li>
-<li>安装Node.js</li>
-<li>安装Hexo</li>
-</ul>
-</blockquote>
-<h3 id="1、注册github账号并建立仓库"><a href="#1、注册github账号并建立仓库" class="headerlink" title="1、注册github账号并建立仓库"></a><strong>1、注册github账号并建立仓库</strong></h3><h4 id="注册github"><a href="#注册github" class="headerlink" title="注册github"></a><strong>注册github</strong></h4><p>打开github官方网站：<a href="https://github.com">https://github.com</a><br>会让输入用户名、邮箱、密码，用户名建议不要用中文，邮箱填写自己常用的吧（后面会在邮箱里接收激活邮件）。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/25/博客搭建/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -700,6 +503,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/26/重识Activity生命周期/"
+           data-title="重识Activity生命周期" data-url="http://yoursite.com/2016/05/26/重识Activity生命周期/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -719,8 +530,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -772,6 +592,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#典型的activity生命周期"><span class="nav-number">1.</span> <span class="nav-text">典型的activity生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#onCreate："><span class="nav-number">1.1.</span> <span class="nav-text">onCreate：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#onDestory"><span class="nav-number">1.2.</span> <span class="nav-text">onDestory:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#onStart"><span class="nav-number">1.3.</span> <span class="nav-text">onStart:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#onStop"><span class="nav-number">1.4.</span> <span class="nav-text">onStop:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#onResume"><span class="nav-number">1.5.</span> <span class="nav-text">onResume:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#onPause"><span class="nav-number">1.6.</span> <span class="nav-text">onPause:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊的onRestart"><span class="nav-number">1.7.</span> <span class="nav-text">特殊的onRestart:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举例："><span class="nav-number">1.8.</span> <span class="nav-text">举例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常生命周期"><span class="nav-number">2.</span> <span class="nav-text">异常生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#情况1、横竖屏切换"><span class="nav-number">2.1.</span> <span class="nav-text">情况1、横竖屏切换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况2、系统内存回收"><span class="nav-number">2.2.</span> <span class="nav-text">情况2、系统内存回收</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#罗里吧嗦"><span class="nav-number">3.</span> <span class="nav-text">罗里吧嗦</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#END"><span class="nav-number">4.</span> <span class="nav-text">END</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -868,6 +699,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
