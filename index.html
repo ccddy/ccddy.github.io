@@ -371,8 +371,7 @@
 
       
         
-          
-            <p>Activity基本上以三种状态存在：</p>
+          <p>Activity基本上以三种状态存在：</p>
 <blockquote>
 <ul>
 <li>运行中<br>  位于屏幕前台并且具有焦点</li>
@@ -381,30 +380,12 @@
 </ul>
 </blockquote>
 <h3 id="典型的activity生命周期"><a href="#典型的activity生命周期" class="headerlink" title="典型的activity生命周期"></a><strong>典型的activity生命周期</strong></h3><p><img src="http://7xuis7.com1.z0.glb.clouddn.com/activity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9Factivity_life.png-x" alt=""></p>
-<h4 id="onCreate："><a href="#onCreate：" class="headerlink" title="onCreate："></a><strong>onCreate：</strong></h4><p>一切的开始，初始化界面、数据</p>
-<h4 id="onDestory"><a href="#onDestory" class="headerlink" title="onDestory:"></a><strong>onDestory:</strong></h4><p>这是生命周期的最后一步，所以要在此释放所有资源，比如网络请求的线程。再者就是销毁有调用<strong>finish()</strong>和系统回收两种情况，可通过<strong>isFinishing()</strong>方法区分两种情形。</p>
-<h4 id="onStart"><a href="#onStart" class="headerlink" title="onStart:"></a><strong>onStart:</strong></h4><p>在 Activity 即将对用户可见之前调用。如果 Activity 转入前台，则后接 onResume()，如果 Activity 转入隐藏状态，则后接 onStop()。这个时候界面已经完成，但是还在后台。</p>
-<h4 id="onStop"><a href="#onStop" class="headerlink" title="onStop:"></a><strong>onStop:</strong></h4><p>Activity 对用户不再可见时调用。如果 Activity 被销毁，或另一个 Activity（一个现有 Activity 或新 Activity）继续执行并将其覆盖，就可能发生这种情况。如果 Activity 恢复与用户的交互，则后接 onRestart()，如果 Activity 被销毁，则后接 onDestroy()。<br>可做些稍微重量级回收工作，但是同样不能太耗时。</p>
-<h4 id="onResume"><a href="#onResume" class="headerlink" title="onResume:"></a><strong>onResume:</strong></h4><p>在 Activity 即将开始与用户进行交互之前调用。 此时，Activity 处于 Activity 堆栈的顶层，并具有用户输入焦点。onStart和onResume都表示activity可见，但是前者还在后台，后者显示到了前台。</p>
-<h4 id="onPause"><a href="#onPause" class="headerlink" title="onPause:"></a><strong>onPause:</strong></h4><p>如果 Activity 返回前台，则后接 onResume()，如果 Activity 转入对用户不可见状态，则后接 onStop()。在跳转未finish下如果可见（比如透明主题等）则不接onStop。<br>此方法通常用于确认对持久性数据的未保存更改(比价重要的，如用户编辑)、停止动画以及其他可能消耗 CPU 的内容，诸如此类。但是不能太耗时，因为新Activity只有在旧的onPasue执行后才会执行。</p>
-<h4 id="特殊的onRestart"><a href="#特殊的onRestart" class="headerlink" title="特殊的onRestart:"></a><strong>特殊的onRestart:</strong></h4><p>在 Activity 已停止并即将再次启动前调用。后接 onStart()。这个方法大家可以在具体情况中考虑使用。</p>
-<h4 id="举例："><a href="#举例：" class="headerlink" title="举例："></a><strong>举例：</strong></h4><blockquote>
-<p>1、A1启动A2，如果A2是透明主题，则A1生命周期走到onPause<br>2、A1启动A2，A1 onPause之后是A2 onCreate，onStart，onResume，然后是A1后面的生命周期<br>3、在2的情况下返回back按键，则A2 onPause，A1 onRestart,onStart,onResume然后A2 onStop，onDestory</p>
-</blockquote>
-<h3 id="异常生命周期"><a href="#异常生命周期" class="headerlink" title="异常生命周期"></a><strong>异常生命周期</strong></h3><h4 id="情况1、横竖屏切换"><a href="#情况1、横竖屏切换" class="headerlink" title="情况1、横竖屏切换"></a><strong>情况1、横竖屏切换</strong></h4><p><img src="http://7xuis7.com1.z0.glb.clouddn.com/activity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F2.png-x" alt="官方的一个流程图"><br>从这个流程图中可以看到两个方法：onSaveInstanceState()和 onRestoreInstanceState()，前者是保存，后者是恢复(也可在onCreate中恢复，但是onCreate需要判空，onRestoreInstanceState则不需要，因为该方法被调用则肯定不为空)。首先需要明确的是onSaveInstanceState是在<strong>生命周期异常</strong>才会被调用的，正常的activity执行是不会调用的。onSaveInstanceState调用是在onStop之前调用，具体和onPause无先后顺序(一般是在onPause之后)。onRestoreInstanceState是在onStart之后调用。</p>
-<p>再者就是Android 框架中几乎每个小工具都会根据需要实现此方法，以便在重建 Activity 时自动保存和恢复对 UI 所做的任何可见更改。例如，EditText 小工具保存用户输入的任何文本，CheckBox 小工具保存复选框的选中或未选中状态。您只需为想要保存其状态的每个小工具<strong>提供一个唯一的 ID（通过 android:id 属性）</strong>。如果小工具没有 ID，则系统无法保存其状态。</p>
-<p>简单提下View保存数据的流程：首先activity会调用onSaveInstanceState去保存数据，这时候会委托window，然后window委托上面的顶级容器，顶级容器viewGroup循环遍历子view保存数据。</p>
-<h4 id="情况2、系统内存回收"><a href="#情况2、系统内存回收" class="headerlink" title="情况2、系统内存回收"></a><strong>情况2、系统内存回收</strong></h4><p>就是说如果系统内存不足，会回收activity。当然，这是有优先级的：前台activity&gt;可见但非前台activity&gt;后台activity。<br>而且，如果一个进程没有四大组件在执行，那么这个进程将很快被系统杀死。所以一般后台工作可以放入Service中执行。</p>
-<h3 id="罗里吧嗦"><a href="#罗里吧嗦" class="headerlink" title="罗里吧嗦"></a><strong>罗里吧嗦</strong></h3><ul>
-<li><p>1、系统也提供了onSaveInstanceState()和 onRestoreInstanceState()不执行的方式，就是在manifest中配置configChanges这个属性(会调用onConfigurationChanged方法)，比如配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:configChanges=&quot;orientation|screenSize&quot;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2、在activity的生命周期中要注意资源的回收，特别是子线程、handle这些的处理。否则很容易导致内存回收异常(哪怕是activity的生命周期正常的情况下)。</p>
-</li>
-</ul>
-<p><br><br>后面会总结下activity的启动模式这个问题。欢迎大家指正错误，共同学习。</p>
-<h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3>
-          
+<h4 id="onCreate："><a href="#onCreate：" class="headerlink" title="onCreate："></a><strong>onCreate：</strong></h4><p>一切的开始，初始化界面、数据<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/26/重识Activity生命周期/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
