@@ -92,13 +92,13 @@
 <meta property="og:site_name" content="聪聪的豆芽">
 <meta property="og:description" content="1.1 Activity的LaunchModeactivity启动模式基本知识不在描述。本文主要是在使用过的前提下进行了进一步的认知。首先任务栈大家都知道，先进后出、后进先出。如果任务栈没有activity了，那就会被系统所回收。Activity启动模式有四种：standard、singleTop、singleTask、singleInstance。
 1.1.1 standard标准模式、系统默认">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1896391-bfe3828605cdf98f.png-x?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-06-01T15:51:05.680Z">
+<meta property="og:image" content="http://7xuis7.com1.z0.glb.clouddn.com/activity%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F1.png-x">
+<meta property="og:updated_time" content="2016-06-01T15:54:17.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="认知Activity启动模式">
 <meta name="twitter:description" content="1.1 Activity的LaunchModeactivity启动模式基本知识不在描述。本文主要是在使用过的前提下进行了进一步的认知。首先任务栈大家都知道，先进后出、后进先出。如果任务栈没有activity了，那就会被系统所回收。Activity启动模式有四种：standard、singleTop、singleTask、singleInstance。
 1.1.1 standard标准模式、系统默认">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1896391-bfe3828605cdf98f.png-x?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="http://7xuis7.com1.z0.glb.clouddn.com/activity%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F1.png-x">
 
 
 
@@ -390,7 +390,7 @@
 </ul>
 </blockquote>
 <h5 id="1-1-4-singleInstance"><a href="#1-1-4-singleInstance" class="headerlink" title="1.1.4 singleInstance"></a>1.1.4 singleInstance</h5><p>加强版的singleTask。会单独创建一个任务栈，并且只放被启动的activity。这里有一种情况，如果A启动B，B启动A，B启动模式为singleInstance。那么这时候会发现AA是在一个栈内，B一个栈。这是因为singleInstance时只允许存在一个B，而且从B启动的activity也不会和B在一个栈内。</p>
-<p><strong>下面说一种多任务栈的情况，如图：</strong><br><img src="http://upload-images.jianshu.io/upload_images/1896391-bfe3828605cdf98f.png-x?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="多任务栈举例"><br>两个任务栈，S1包含activity1和activity2，S2包含activity Y和activity X，且activity Y启动模式为singleTask。此时activity2启动activity Y，那么S2任务栈移到前台。此时按back按键，则activity Y移除栈，再按back按键，则移除activity X，此时S2任务栈没有activity了，则被回收。S1任务栈移到前台。</p>
+<p><strong>下面说一种多任务栈的情况，如图：</strong><br><img src="http://7xuis7.com1.z0.glb.clouddn.com/activity%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F1.png-x" alt="多任务栈举例"><br>两个任务栈，S1包含activity1和activity2，S2包含activity Y和activity X，且activity Y启动模式为singleTask。此时activity2启动activity Y，那么S2任务栈移到前台。此时按back按键，则activity Y移除栈，再按back按键，则移除activity X，此时S2任务栈没有activity了，则被回收。S1任务栈移到前台。</p>
 <h4 id="1-2-指定activity启动模式"><a href="#1-2-指定activity启动模式" class="headerlink" title="1.2 指定activity启动模式"></a>1.2 指定activity启动模式</h4><p>两种方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">    android:name=&quot;.AAy&quot;</span><br><span class="line">    android:launchMode=&quot;singleInstance&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
 <p>和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent(MainActivity.this, AAy.class);</span><br><span class="line">intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
 <p><strong>区别：</strong></p>
