@@ -1,0 +1,737 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1.1 Activity的LaunchModeactivity启动模式基本知识不在描述。本文主要是在使用过的前提下进行了进一步的认知。首先任务栈大家都知道，先进后出、后进先出。如果任务栈没有activity了，那就会被系统所回收。Activity启动模式有四种：standard、singleTop、singleTask、singleInstance。
+1.1.1 standard标准模式、系统默认">
+<meta property="og:type" content="article">
+<meta property="og:title" content="认知Activity启动模式">
+<meta property="og:url" content="http://yoursite.com/2016/06/01/认知Activity启动模式/index.html">
+<meta property="og:site_name" content="聪聪的豆芽">
+<meta property="og:description" content="1.1 Activity的LaunchModeactivity启动模式基本知识不在描述。本文主要是在使用过的前提下进行了进一步的认知。首先任务栈大家都知道，先进后出、后进先出。如果任务栈没有activity了，那就会被系统所回收。Activity启动模式有四种：standard、singleTop、singleTask、singleInstance。
+1.1.1 standard标准模式、系统默认">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1896391-bfe3828605cdf98f.png-x?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-06-01T15:51:05.680Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="认知Activity启动模式">
+<meta name="twitter:description" content="1.1 Activity的LaunchModeactivity启动模式基本知识不在描述。本文主要是在使用过的前提下进行了进一步的认知。首先任务栈大家都知道，先进后出、后进先出。如果任务栈没有activity了，那就会被系统所回收。Activity启动模式有四种：standard、singleTop、singleTask、singleInstance。
+1.1.1 standard标准模式、系统默认">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1896391-bfe3828605cdf98f.png-x?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 认知Activity启动模式 | 聪聪的豆芽 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?16fee5c8785dda86d4c53000b36cd2cb";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=56372171";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">聪聪的豆芽</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-android">
+          <a href="/categories/android" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Android
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-chat">
+          <a href="/categories/chat" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            杂玩
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'Ho1HRMCE2H6LBsGAmMiV','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                认知Activity启动模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-01T23:50:01+08:00" content="2016-06-01">
+              2016-06-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/01/认知Activity启动模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/01/认知Activity启动模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-1-Activity的LaunchMode"><a href="#1-1-Activity的LaunchMode" class="headerlink" title="1.1 Activity的LaunchMode"></a>1.1 Activity的LaunchMode</h4><p>activity启动模式基本知识不在描述。本文主要是在使用过的前提下进行了进一步的认知。首先任务栈大家都知道，先进后出、后进先出。如果任务栈没有activity了，那就会被系统所回收。Activity启动模式有四种：standard、singleTop、singleTask、singleInstance。</p>
+<h5 id="1-1-1-standard"><a href="#1-1-1-standard" class="headerlink" title="1.1.1 standard"></a>1.1.1 standard</h5><p>标准模式、系统默认模式，每次启动均会创建实例压入栈中。<br>这里有一个点：编写类似下面代码启动activity会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyApplication.getInstance().startActivity(</span><br><span class="line">   new Intent(MainActivity.this, AAy.class));</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">android.util.AndroidRuntimeException: </span><br><span class="line"> Calling startActivity() from outside of an Activity  context requires </span><br><span class="line"> the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?</span><br></pre></td></tr></table></figure></p>
+<p>这是因为正常standard启动模式的activity默认会进入启动它的Activity所属的任务栈中(<strong>singleInstance除外</strong>)，但是非activity的Context没有任务栈(<strong>任务栈是针对activity</strong>)，所以出了上诉的错误和建议，加上以下设定即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br></pre></td></tr></table></figure></p>
+<p>此时实际上以singleTask模式启动activity。</p>
+<h5 id="1-1-2-singleTop"><a href="#1-1-2-singleTop" class="headerlink" title="1.1.2 singleTop"></a>1.1.2 singleTop</h5><p>这种模式简单来讲就是如果被启动activity位于栈定，那么就不会被重新创建，同时调用onNewIntent方法。<br>这个地方有一点小逻辑，比如两个Activity，AB，A为singleTop模式，A启动了B，然后B这样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">finish();</span><br><span class="line">startActivity(new Intent(AAy.this, MainActivity.class));</span><br></pre></td></tr></table></figure></p>
+<p>你会发现这个时候复用了A，而且调用了A的onNewIntent方法。这种效果有点类似于startActivityForResult方法。再者如果这样子调用的话：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">startActivity(new Intent(AAy.this, MainActivity.class));</span><br><span class="line">finish();</span><br></pre></td></tr></table></figure></p>
+<p>是会创建一个新的B。其实也就是说<strong>finish方法有一个作用是把当前activity移除栈</strong><br>如果正常B直接finish的话，A是会调用onRestart方法。</p>
+<p><strong>还有一种情况是：</strong><br>有两个activity，A和B，A启动模式为singleTop，B启动模式为singleTask且设定taskAffinity=”a.a”，那么先启动A，然后A中启动B，B再启动A。这时候会发现虽然A和B归属两个不同的任务栈，但是系统默认还是会遍历任务栈是否有A。但是如果A的启动模式为默认的，那么先启动A，然后A中启动B，B再启动A，那么就是第一个A是在默认的栈中，B和第二次启动在栈a.a中。</p>
+<h5 id="1-1-3-singleTask"><a href="#1-1-3-singleTask" class="headerlink" title="1.1.3 singleTask"></a>1.1.3 singleTask</h5><p>栈内复用模式，如果singleTask模式启动的activity存在一个栈中，则会被复用，并调用其onNewIntent方法。判断的的方式是如果要启动activity，首先会查找所需的栈是否存在，不存在则新建栈并放入activity，如果存在则会压入栈中。并且自带clearTop效果。</p>
+<blockquote>
+<ul>
+<li>如果存在任务栈S1，所需任务栈为S2，那么会创建S2并放入activity。</li>
+<li>如果存在任务栈S1，所需任务栈为S1，那么新建activity压入栈中，无论此时栈中是否有activity。</li>
+<li>如果存在任务栈S1，S1内有被启动的activity，那么会复用S1栈的activity并调用onNewIntent方法。此时会移除此activity上面的activity，移到栈顶。</li>
+</ul>
+</blockquote>
+<h5 id="1-1-4-singleInstance"><a href="#1-1-4-singleInstance" class="headerlink" title="1.1.4 singleInstance"></a>1.1.4 singleInstance</h5><p>加强版的singleTask。会单独创建一个任务栈，并且只放被启动的activity。这里有一种情况，如果A启动B，B启动A，B启动模式为singleInstance。那么这时候会发现AA是在一个栈内，B一个栈。这是因为singleInstance时只允许存在一个B，而且从B启动的activity也不会和B在一个栈内。</p>
+<p><strong>下面说一种多任务栈的情况，如图：</strong><br><img src="http://upload-images.jianshu.io/upload_images/1896391-bfe3828605cdf98f.png-x?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="多任务栈举例"><br>两个任务栈，S1包含activity1和activity2，S2包含activity Y和activity X，且activity Y启动模式为singleTask。此时activity2启动activity Y，那么S2任务栈移到前台。此时按back按键，则activity Y移除栈，再按back按键，则移除activity X，此时S2任务栈没有activity了，则被回收。S1任务栈移到前台。</p>
+<h4 id="1-2-指定activity启动模式"><a href="#1-2-指定activity启动模式" class="headerlink" title="1.2 指定activity启动模式"></a>1.2 指定activity启动模式</h4><p>两种方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">    android:name=&quot;.AAy&quot;</span><br><span class="line">    android:launchMode=&quot;singleInstance&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent(MainActivity.this, AAy.class);</span><br><span class="line">intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p><strong>区别：</strong></p>
+<ul>
+<li>1、优先级为第二种最高</li>
+<li>2、使用范围不同，第一种无法直接为activity设定FLAG_ACTIVITY_CLEAR_TOP，第二种无法为activity设定singleInstance。</li>
+</ul>
+<h4 id="1-3-任务栈"><a href="#1-3-任务栈" class="headerlink" title="1.3 任务栈"></a>1.3 任务栈</h4><p>默认所有activity所在的栈名为应用的包名。自定义的话可以在manifest中设定，如;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:taskAffinity=&quot;a.a&quot;</span><br></pre></td></tr></table></figure></p>
+<p>比如在application中设定，那么任务栈的名称就变成了”.a.a”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Stack #1:</span><br><span class="line">  Task id #3474</span><br><span class="line">    TaskRecord&#123;596be1d #3474 A=a.a U=0 sz=2&#125;</span><br><span class="line">    Intent &#123; act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=com.ccddy.test/.MainActivity &#125;</span><br><span class="line">      Hist #1: ActivityRecord&#123;11d80d35 u0 com.ccddy.test/.AAy t3474&#125;</span><br><span class="line">        Intent &#123; cmp=com.ccddy.test/.AAy &#125;</span><br><span class="line">        ProcessRecord&#123;3689f892 18292:com.ccddy.test/u0a196&#125;</span><br><span class="line">      Hist #0: ActivityRecord&#123;210ce749 u0 com.ccddy.test/.MainActivity t3474&#125;</span><br><span class="line">        Intent &#123; act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=com.ccddy.test/.MainActivity &#125;</span><br><span class="line">        ProcessRecord&#123;3689f892 18292:com.ccddy.test/u0a196&#125;</span><br></pre></td></tr></table></figure></p>
+<p>查看任务栈方法：在AS中点击Terminal并输入命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell dumpsys activity</span><br></pre></td></tr></table></figure></p>
+<p>找到ACTIVITY MANAGER ACTIVITIES，即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)</span><br><span class="line">Display #0 (activities from top to bottom):</span><br><span class="line">  Stack #1:</span><br><span class="line">    Task id #3474</span><br></pre></td></tr></table></figure></p>
+<p>但是如果在activity的标签中设定taskAffinity，并且activity启动模式例如为standard是没有意义的，而且栈的名称还是默认包名。<strong>1、</strong>但是如果taskAffinity和singleTask配对使用时，可以把singleTask放在指定的任务栈中。<strong>2、</strong>taskAffinity和allowTaskReparenting结合使用：比如当一个应用A启动了应用B的某个activity后，如果这个activity的allowTaskReparenting为true时，然后按home按键回到桌面，点击B的桌面图标，这时候不是启动B的主activity，会启动被A启动的那个activity，也就是说把activity从A的任务栈中拉入了B中的任务栈中了。</p>
+<h4 id="1-4-Activity的Flags"><a href="#1-4-Activity的Flags" class="headerlink" title="1.4 Activity的Flags"></a>1.4 Activity的Flags</h4><p>标记为比较多，一般不会使用，而且有些是系统内部设定使用的。主要说明一下四种(不止四种哦)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLAG_ACTIVITY_NEW_TASK</span><br></pre></td></tr></table></figure></p>
+<p>作用和singleTask一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLAG_ACTIVITY_SINGLE_TOP</span><br></pre></td></tr></table></figure></p>
+<p>作用和singleTop一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLAG_ACTIVITY_CLEAR_TOP</span><br></pre></td></tr></table></figure></p>
+<p>有点类似singleTask的clearTop效果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS</span><br></pre></td></tr></table></figure></p>
+<p>具有这个标记的activity不会出现在最近运行任务的列表中(比如小米按菜单键那个运行中的APP列表)。和xml中设定android:excludeFromRecents=”true”。</p>
+<h4 id="1-5-清理返回栈"><a href="#1-5-清理返回栈" class="headerlink" title="1.5 清理返回栈"></a>1.5 清理返回栈</h4><p>如果用户长时间离开任务，则系统会清除所有 Activity 的任务，根任务除外。 当用户再次返回到任务时，仅恢复根 Activity。系统这样做的原因是，经过很长一段时间后，用户可能已经放弃之前执行的操作，返回到任务是要开始执行新的操作。<br>您可以使用下列几个 Activity 属性修改此行为：</p>
+<ul>
+<li><p>alwaysRetainTaskState<br>如果在任务的根 Activity 中将此属性设置为 “true”，则不会发生刚才所述的默认行为。即使在很长一段时间后，任务仍将所有 Activity 保留在其堆栈中。</p>
+</li>
+<li><p>clearTaskOnLaunch<br>如果在任务的根 Activity 中将此属性设置为 “true”，则每当用户离开任务然后返回时，系统都会将堆栈清除到只剩下根 Activity。 换而言之，它与alwaysRetainTaskState正好相反。 即使只离开任务片刻时间，用户也始终会返回到任务的初始状态。</p>
+</li>
+<li><p>finishOnTaskLaunch<br>此属性类似于 clearTaskOnLaunch但它对单个 Activity 起作用，而非整个任务。 此外，它还有可能会导致任何 Activity 停止，包括根 Activity。 设置为 “true”时，Activity 仍是任务的一部分，但是仅限于当前会话。如果用户离开然后返回任务，则任务将不复存在。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/26/重识Activity生命周期/" rel="next" title="重识Activity生命周期">
+                <i class="fa fa-chevron-left"></i> 重识Activity生命周期
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/06/01/认知Activity启动模式/"
+     data-title="认知Activity启动模式"
+     data-content=""
+     data-url="http://yoursite.com/2016/06/01/认知Activity启动模式/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/01/认知Activity启动模式/"
+           data-title="认知Activity启动模式" data-url="http://yoursite.com/2016/06/01/认知Activity启动模式/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="聪聪的豆芽" />
+          <p class="site-author-name" itemprop="name">聪聪的豆芽</p>
+          <p class="site-description motion-element" itemprop="description">一起学习进步吧</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/ccddy" target="_blank" title="博客园">
+                  
+                  博客园
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-Activity的LaunchMode"><span class="nav-number">1.</span> <span class="nav-text">1.1 Activity的LaunchMode</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-1-standard"><span class="nav-number">1.1.</span> <span class="nav-text">1.1.1 standard</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-2-singleTop"><span class="nav-number">1.2.</span> <span class="nav-text">1.1.2 singleTop</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-3-singleTask"><span class="nav-number">1.3.</span> <span class="nav-text">1.1.3 singleTask</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-4-singleInstance"><span class="nav-number">1.4.</span> <span class="nav-text">1.1.4 singleInstance</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-指定activity启动模式"><span class="nav-number">2.</span> <span class="nav-text">1.2 指定activity启动模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-任务栈"><span class="nav-number">3.</span> <span class="nav-text">1.3 任务栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-Activity的Flags"><span class="nav-number">4.</span> <span class="nav-text">1.4 Activity的Flags</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-清理返回栈"><span class="nav-number">5.</span> <span class="nav-text">1.5 清理返回栈</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">聪聪的豆芽</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ccddy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
